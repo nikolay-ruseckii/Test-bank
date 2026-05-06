@@ -1,5 +1,6 @@
 import pytest
 from src.main.api.models.create_user_request import CreateUserRequest
+from src.main.api.generators.deposit_data_generator import DepositDataGenerator
 
 
 @pytest.fixture
@@ -18,4 +19,10 @@ def test_account(api_manager, created_user):
         "username": created_user["username"],
         "password": created_user["password"],
         "balance": account_response.balance
+    }
+
+@pytest.fixture
+def deposit_data() -> dict:
+    return {
+        "amount": DepositDataGenerator.amount()
     }
