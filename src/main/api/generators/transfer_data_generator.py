@@ -11,5 +11,5 @@ class TransferDataGenerator:
         return randint(transfer_amount, 9000)
 
     @staticmethod
-    def invalid_high_amount() -> int:
-        return 999999
+    def insufficient_funds_amount() -> int:
+        return randint(500, 10000)

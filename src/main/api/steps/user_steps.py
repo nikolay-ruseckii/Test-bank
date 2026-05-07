@@ -121,6 +121,26 @@ class UserSteps(BaseSteps):
             password=password
         )
 
+    def transfer_insufficient_funds(
+            self,
+            from_account_id: int,
+            to_account_id: int,
+            amount: int,
+            username: str,
+            password: str
+    ):
+        body = {
+            "fromAccountId": from_account_id,
+            "toAccountId": to_account_id,
+            "amount": amount
+        }
+
+        return CrudRequester(
+            RequestSpecs.auth_headers(username=username, password=password),
+            Endpoint.TRANSFER,
+            ResponseSpecs.request_unprocessable_entity()
+        ).post_raw(body)
+
     def transfer_raw(self, body: dict, username: str, password: str):
         return CrudRequester(
             RequestSpecs.auth_headers(username=username, password=password),
