@@ -7,6 +7,7 @@ from src.main.api.classes.api_manager import ApiManager
 from src.main.api.db.crud.account_crud import AccountCrudDb
 from src.main.api.models.fixture_models import FundedTwoAccountsFixtureModel
 from src.main.api.models.fixture_models import TwoAccountsFixtureModel
+from src.main.api.models.fixture_models import TransferDataFixtureModel
 
 
 @allure.feature("Transfer")
@@ -38,12 +39,12 @@ class TestTransfer:
             self,
             api_manager: ApiManager,
             user_with_two_accounts: TwoAccountsFixtureModel,
-            transfer_data: dict
+            transfer_data: TransferDataFixtureModel
     ):
         response = api_manager.user_steps.transfer_insufficient_funds(
             from_account_id=user_with_two_accounts.account_1,
             to_account_id=user_with_two_accounts.account_2,
-            amount=transfer_data["insufficient_funds_amount"],
+            amount=transfer_data.insufficient_funds_amount,
             username=user_with_two_accounts.username,
             password=user_with_two_accounts.password
         )
